@@ -1,0 +1,126 @@
+<html>
+   <head>
+      <title>Testing stuff!</title>
+   </head>
+   <body>
+      <!--
+      ============================================================
+      Capturing The Mouse Position in IE4-6 & NS4-6
+      (C) 2000 www.CodeLifter.com
+      Free for all users, but leave in this  header
+      //-->
+
+      <script language="JavaScript1.2">
+
+         <!--
+         var IE = document.all ? true : false
+         if (!IE) document.captureEvents(Event.MOUSEMOVE)
+
+         function getMouseXY(event)
+         {
+            tempX = 0
+            tempY = 0
+
+            if(IE)
+            {
+               tempX = event.clientX + document.body.scrollLeft
+               tempY = event.clientY + document.body.scrollTop
+            }
+            else
+            {
+               tempX = event.pageX
+               tempY = event.pageY
+            }  
+
+            if(tempX < 25)
+            {
+               tempX = 25
+            }
+            if(tempX > 1024 - 25)
+            {
+               tempX = 1024 - 25
+            }
+            if(tempY < 25)
+            {
+               tempY = 25
+            }
+            if(tempY > 768 - 25)
+            {
+               tempY = 768 - 25
+            }
+
+            SmallBox = document.getElementById('MBox')
+            SmallBox.style.left = tempX - 25
+            SmallBox.style.top = tempY - 25
+
+            return true
+         }
+
+         function presskey(event)
+         {
+            SmallBox = document.getElementById('MBox')
+            tempX = parseFloat(SmallBox.style.left.replace(/px/ig, ""))
+            tempY = parseFloat(SmallBox.style.top.replace(/px/ig, ""))
+
+            keynum = 0
+            if(window.event)
+            {
+               keynum = event.keyCode
+            }
+            else if(event.which)
+            {
+               keynum = event.which
+            }
+
+            // alert('Key with code ' + keynum + ' pressed!')
+
+            if(keynum == 83)   // s
+            {
+               tempY = tempY + 20;
+            }
+            if(keynum == 65)   // a
+            {
+               tempX = tempX - 20;
+            }
+            if(keynum == 68)   // d
+            {
+               tempX = tempX + 20;
+            }
+            if(keynum == 87)   // w
+            {
+               tempY = tempY - 20;
+            }
+
+            if(tempX < 0)
+            {
+               tempX = 0
+            }
+            if(tempX > 1024 - 50)
+            {
+               tempX = 1024 - 50
+            }
+            if(tempY < 0)
+            {
+               tempY = 0
+            }
+            if(tempY > 768 - 50)
+            {
+               tempY = 768 - 50
+            }
+
+            SmallBox.style.top = tempY
+            SmallBox.style.left = tempX
+
+            return true
+         }
+
+         //-->
+      </script>
+
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px;">
+         <div style="background-color: #00FFFF; position: absolute; width: 200px; height: 200px; left: 200px; top: 400px; border-style: dashed; border-color: #0000FF; text-align: center; line-height: 200px" onClick="alert('Clicked!')"></div>
+         <div style="background-color: #FF00FF; position: absolute; width: 50px; height: 50px; left: 30px; top: 20px; border-style: dashed; border-color: #00FF00; text-align: center; line-height: 50px" id="MBox">M</div>
+      </div>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid" id="Interface" ondragstart="return false" onclick="getMouseXY(event)" onkeydown="presskey(event)" onmouseover="this.focus()" tabindex="1"></div>
+   </body>
+</html>
