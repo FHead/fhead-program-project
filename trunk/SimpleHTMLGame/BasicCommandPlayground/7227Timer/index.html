@@ -1,0 +1,179 @@
+<html>
+   <head>
+      <title>Testing timer</title>
+      <script language="JavaScript1.2">
+         <!--
+         var count = 0;
+         var timerID = null;
+         var timerRunning = false;
+         var lastsecond = 0;
+         var fpscount = 0;
+         var fpsstring = '--- fps';
+         var angle = 0;
+         var mouseX = 0;
+         var mouseY = 0;
+
+         function StopTheClock()
+         {
+            if(timerRunning)
+               clearTimeout(timerID);
+            timerRunning = false;
+         }
+
+         function StartTheTimer()
+         {
+            angle = angle + 0.18
+         
+            var currenttime = new Date();
+            // datestring = currenttimee.getHours().toString() + "H " + currenttime.getMinutes().toString() + "M " + currenttime.getSeconds().toString() + "S " + currenttime.getMilliseconds().toString();
+            hourstring = currenttime.getHours()
+            minutestring = currenttime.getMinutes()
+            if(minutestring < 10)
+               minutestring = '0' + minutestring;
+            secondstring = currenttime.getSeconds()
+            if(secondstring < 10)
+               secondstring = '0' + secondstring;
+            millisecondstring = currenttime.getMilliseconds()
+            if(millisecondstring < 100 && millisecondstring >= 10)
+               millisecondstring = '0' + millisecondstring
+            else if(millisecondstring < 10)
+               millisecondstring = '00' + millisecondstring
+            datestring = hourstring + ':' + minutestring + ':' + secondstring + '.' + millisecondstring;
+         
+            fpscount = fpscount + 1;
+            if(currenttime.getSeconds() != lastsecond)
+            {
+               fpsstring = fpscount.toString() + ' fps, or ' + (1 / fpscount).toString() + ' spf';
+               fpscount = 0;
+               lastsecond = currenttime.getSeconds();
+            }
+            
+            updateLocation()
+            
+            count = count + 1;
+            timerRunning = true;
+            document.getElementById('MessagePanel').innerHTML = 'Log message panel<br />&nbsp;&nbsp;&nbsp;Current tick: ' + count.toString() + ' ticks<br />&nbsp;&nbsp;&nbsp;Current time: ' + datestring + '<br />&nbsp;&nbsp;&nbsp;Frame rate: ' + fpsstring + '<br />';
+            timerID = self.setTimeout("StartTheTimer()", 1);
+         }
+         
+         function TimerSwitch()
+         {
+            if(timerRunning == true)
+               StopTheClock();
+            else
+               StartTheTimer();
+         }
+
+         var IE = document.all ? true : false
+         if (!IE) document.captureEvents(Event.MOUSEMOVE)
+
+         function getMouseXY(event)
+         {
+            mouseX = 0
+            mouseY = 0
+
+            if(IE)
+            {
+               mouseX = event.clientX + document.body.scrollLeft
+               mouseY = event.clientY + document.body.scrollTop
+            }
+            else
+            {
+               mouseX = event.pageX
+               mouseY = event.pageY
+            }
+            
+            updateLocation()
+         }
+         
+         function updateLocation()
+         {
+            tempX = mouseX + 50 * Math.cos(angle);
+            tempY = mouseY + 50 * Math.sin(angle);
+
+            if(tempX < 25)
+            {
+               tempX = 25
+            }
+            if(tempX > 1024 - 25)
+            {
+               tempX = 1024 - 25
+            }
+            if(tempY < 25)
+            {
+               tempY = 25
+            }
+            if(tempY > 768 - 25)
+            {
+               tempY = 768 - 25
+            }
+
+            SmallBox = document.getElementById('MBox')
+            SmallBox.style.left = tempX - 25
+            SmallBox.style.top = tempY - 25
+
+            tempX = mouseX - 150 * Math.cos(angle * 1.25);
+            tempY = mouseY + 150 * Math.sin(angle * 1.25);
+
+            if(tempX < 12)
+            {
+               tempX = 12
+            }
+            if(tempX > 1024 - 12)
+            {
+               tempX = 1024 - 12
+            }
+            if(tempY < 12)
+            {
+               tempY = 12
+            }
+            if(tempY > 768 - 12)
+            {
+               tempY = 768 - 12
+            }
+
+            SmallBox = document.getElementById('YBox')
+            SmallBox.style.left = tempX - 12;
+            SmallBox.style.top = tempY - 12;
+
+            tempX = 1024 - mouseX - 100 * Math.cos(angle * 0.25);
+            tempY = 768 - mouseY - 50 * Math.sin(angle * 0.25);
+            
+            if(tempX < 105)
+            {
+               tempX = 100
+            }
+            if(tempX > 1024 - 100)
+            {
+               tempX = 1024 - 100
+            }
+            if(tempY < 100)
+            {
+               tempY = 100
+            }
+            if(tempY > 768 - 100)
+            {
+               tempY = 768 - 100
+            }
+
+            BlueBox.style.left = tempX - 100
+            BlueBox.style.top = tempY - 100
+
+            return true
+         }
+
+         -->
+      </script>
+   </head>
+   <body>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px;">
+         <div style="background-color: #00FFFF; position: absolute; width: 200px; height: 200px; left: 200px; top: 400px; border-style: dashed; border-color: #0000FF; text-align: center; line-height: 200px" onClick="alert('Clicked!')" id="BlueBox">C</div>
+         <div style="background-color: #FF00FF; position: absolute; width: 50px; height: 50px; left: 30px; top: 20px; border-style: dashed; border-color: #00FF00; text-align: center; line-height: 50px" id="MBox">M</div>
+         <div style="background-color: #FFFF00; position: absolute; width: 24px; height: 24px; left: 60px; top: 70px; border-style: dashed; border-color: #7F7F00; text-align: center; line-height: 24px" id="YBox">Y</div>
+      </div>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid" id="Interface" ondragstart="return false" onmouseover="this.focus()" tabindex="1" onclick="TimerSwitch()" onmousemove="getMouseXY(event)"></div>
+      <div style="width: 400px; height: 768px; position: absolute; top: 0px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#00FF00;" id="MessagePanel">
+         Log message panel<br />
+      </div>
+   </body>
+</html>
