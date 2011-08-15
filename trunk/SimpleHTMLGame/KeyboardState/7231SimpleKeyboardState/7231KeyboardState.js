@@ -97,15 +97,15 @@ function MoveBox()
    
    if(KeyboardStatus[103] > 0)   // up-left
    {
-      directionX = directionX - Math.sqrt(2);
-      directionY = directionY - Math.sqrt(2);
+      directionX = directionX - Math.sqrt(2) / 2;
+      directionY = directionY - Math.sqrt(2) / 2;
    }
    if(KeyboardStatus[104] > 0 || KeyboardStatus[38])   // up
       directionY = directionY - 1;
    if(KeyboardStatus[105] > 0)   // up-right
    {
-      directionX = directionX + Math.sqrt(2);
-      directionY = directionY - Math.sqrt(2);
+      directionX = directionX + Math.sqrt(2) / 2;
+      directionY = directionY - Math.sqrt(2) / 2;
    }
    if(KeyboardStatus[100] > 0 || KeyboardStatus[37] > 0)   // left
       directionX = directionX - 1;
@@ -113,15 +113,15 @@ function MoveBox()
       directionX = directionX + 1;
    if(KeyboardStatus[97] > 0)   // down-left
    {
-      directionX = directionX - Math.sqrt(2);
-      directionY = directionY + Math.sqrt(2);
+      directionX = directionX - Math.sqrt(2) / 2;
+      directionY = directionY + Math.sqrt(2) / 2;
    }
    if(KeyboardStatus[98] > 0 || KeyboardStatus[40] > 0)   // down
       directionY = directionY + 1;
    if(KeyboardStatus[99] > 0)   // down-right
    {
-      directionX = directionX + Math.sqrt(2);
-      directionY = directionY + Math.sqrt(2);
+      directionX = directionX + Math.sqrt(2) / 2;
+      directionY = directionY + Math.sqrt(2) / 2;
    }
    
    length = Math.sqrt(directionX * directionX + directionY * directionY);
