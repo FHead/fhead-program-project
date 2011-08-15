@@ -1,0 +1,24 @@
+<html>
+   <head>
+      <title>Tracking keyboard state</title>
+      <script type="text/javascript" src="7231KeyboardState.js"></script>
+   </head>
+   <body onload='Initialize();'>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px;">
+         <div style="background-color: #FFFF00; position: absolute; width: 24px; height: 24px; left: 60px; top: 70px; border-style: dashed; border-color: #7F7F00; text-align: center; line-height: 24px" id="BBox">B</div>
+      </div>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid" id="Interface" ondragstart="return false" onmouseover="this.focus()" tabindex="1" onkeydown="KeyDown(event)" onkeyup="KeyUp(event)"></div>
+      <div style="width: 400px; height: 150px; position: absolute; top: 0px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="TimingPanel">
+         Timing panel<br />
+      </div>
+      <div style="width: 400px; height: 468px; position: absolute; top: 150px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="MessagePanel">
+         Message panel<br />
+      </div>
+      <div style="width: 400px; height: 150px; position: absolute; top: 618px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="ExplanationPanel">
+         This page is to test keyboard capture<br />
+         &nbsp;&nbsp;&nbsp;Press arrow keys (or keypad) to move box around<br />
+         &nbsp;&nbsp;&nbsp;Hold shift while moving to move at slower speed<br />
+         &nbsp;&nbsp;&nbsp;Hold shift while moving to move at faster speed<br />
+      </div>
+   </body>
+</html>
