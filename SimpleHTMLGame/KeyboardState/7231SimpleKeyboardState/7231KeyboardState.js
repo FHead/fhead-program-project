@@ -43,7 +43,7 @@ function StartTimer()
 
    UpdateKeyStatus();
    
-   currentmillisecond = currenttime.getHours() * 3600 * 1000 + currenttime.getMinutes() * 60 * 1000 + currenttime.getSeconds() * 1000 + currenttime.getMilliseconds();
+   currentmillisecond = currenttime.getTime();
    MoveBox();
    lastmillisecond = currentmillisecond;
 
