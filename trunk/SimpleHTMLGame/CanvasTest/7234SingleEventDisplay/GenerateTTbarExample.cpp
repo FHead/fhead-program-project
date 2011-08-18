@@ -19,6 +19,7 @@ int main()
    pythia.init(2212, 2212, 7000);
 
    pythia.next();
+   pythia.event.list();
 
    vector<GenParticle> particles(pythia.event.size());
    for(int j = 0; j < pythia.event.size(); j++)
@@ -63,6 +64,7 @@ int main()
       if(WriteOut == false)
          continue;
 
+      cout << setprecision(10);
       cout << "   NewParticle.P[0] = " << Event[i].P[0] << endl;
       cout << "   NewParticle.P[1] = " << Event[i].P[1] << endl;
       cout << "   NewParticle.P[2] = " << Event[i].P[2] << endl;
