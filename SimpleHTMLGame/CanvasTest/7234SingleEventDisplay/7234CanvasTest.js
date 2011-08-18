@@ -16,6 +16,7 @@ var Balls = new Array();   // holds rendering information
 var MouseX = 0;
 var MouseY = 0;
 var FocusParticle = -1;
+var InitialCircleSize = 2;
 
 var UserPosition = new Array(4);
 var UserUp = new Array(4);
@@ -48,83 +49,21 @@ function Initialize()
    ReferenceTime = CurrentTime.getTime();
 
    UserPosition[0] = 0;
-   UserPosition[1] = 100;
-   UserPosition[2] = 0;
+   UserPosition[1] = 0;
+   UserPosition[2] = -100;
    UserPosition[3] = 0;
    
    UserUp[0] = 0;
-   UserUp[1] = 0;
+   UserUp[1] = 1;
    UserUp[2] = 0;
-   UserUp[3] = 1;
+   UserUp[3] = 0;
 
    KeyboardStatus[33] = 0;
    KeyboardStatus[34] = 0;
    KeyboardStatus[35] = 0;
    KeyboardStatus[36] = 0;
-   
-   // initialize particles
-   var NewParticle = new Object;
-   NewParticle.P = new Array(4);
-   NewParticle.P[0] = 10;
-   NewParticle.P[1] = 10;
-   NewParticle.P[2] = 0;
-   NewParticle.P[3] = 0;
-   NewParticle.V0 = new Array(4);
-   NewParticle.V0[0] = 0;
-   NewParticle.V0[1] = 0;
-   NewParticle.V0[2] = 0;
-   NewParticle.V0[3] = 0;
-   NewParticle.Time = 999999;
-   NewParticle.PDGID = 1;
-   ParticleList[ParticleList.length] = NewParticle.clone();
-   
-   NewParticle.P[0] = 10;
-   NewParticle.P[1] = 0;
-   NewParticle.P[2] = 10;
-   NewParticle.P[3] = 0;
-   NewParticle.V0[0] = 0;
-   NewParticle.V0[1] = 0;
-   NewParticle.V0[2] = 0;
-   NewParticle.V0[3] = 0;
-   NewParticle.Time = 999999;
-   NewParticle.PDGID = 2;
-   ParticleList[ParticleList.length] = NewParticle.clone();
-
-   NewParticle.P[0] = 10;
-   NewParticle.P[1] = 0;
-   NewParticle.P[2] = 0;
-   NewParticle.P[3] = 10;
-   NewParticle.V0[0] = 0;
-   NewParticle.V0[1] = 0;
-   NewParticle.V0[2] = 0;
-   NewParticle.V0[3] = 0;
-   NewParticle.Time = 999999;
-   NewParticle.PDGID = 3;
-   ParticleList[ParticleList.length] = NewParticle.clone();
-
-   NewParticle.P[0] = 10;
-   NewParticle.P[1] = 6;
-   NewParticle.P[2] = 3;
-   NewParticle.P[3] = -6;
-   NewParticle.V0[0] = 0;
-   NewParticle.V0[1] = 0;
-   NewParticle.V0[2] = 0;
-   NewParticle.V0[3] = 0;
-   NewParticle.Time = 999999;
-   NewParticle.PDGID = 4;
-   ParticleList[ParticleList.length] = NewParticle.clone();
-
-   NewParticle.P[0] = 10;
-   NewParticle.P[1] = -4;
-   NewParticle.P[2] = -4;
-   NewParticle.P[3] = -4;
-   NewParticle.V0[0] = 0;
-   NewParticle.V0[1] = 0;
-   NewParticle.V0[2] = 0;
-   NewParticle.V0[3] = 0;
-   NewParticle.Time = 999999;
-   NewParticle.PDGID = 5;
-   ParticleList[ParticleList.length] = NewParticle.clone();
+ 
+   InitializeParticles();
 
    StartTimer();
 }
@@ -284,7 +223,7 @@ function Render(CanvasHandle)
       if(isNaN(i) == true)
          continue;
          
-      var CircleSize = 5.0 * 100.0 / Balls[i].Distance;
+      var CircleSize = InitialCircleSize * 100.0 / Balls[i].Distance;
 
       CanvasHandle.fillStyle = '#C0C0FF';
       CanvasHandle.beginPath();
@@ -425,7 +364,7 @@ function UpdateFocusParticle()
       var DeltaX = MouseX - Balls[i].X;
       var DeltaY = MouseY - Balls[i].Y;
       var DeltaR2 = DeltaX * DeltaX + DeltaY * DeltaY;
-      var CircleSize = 5.0 * 100.0 / Balls[i].Distance * 1.25;
+      var CircleSize = InitialCircleSize * 100.0 / Balls[i].Distance * 1.25;
    
       if(DeltaR2 < CircleSize * CircleSize)
       {
