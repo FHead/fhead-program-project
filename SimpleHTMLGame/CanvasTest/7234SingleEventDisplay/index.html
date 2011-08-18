@@ -1,0 +1,36 @@
+<html>
+   <head>
+      <title>Single-event display</title>
+      <script type="text/javascript" src="7234VectorOperations.js"></script>
+      <script type="text/javascript" src="7234CanvasTest.js"></script>
+   </head>
+   <body onload='Initialize();'>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid">
+         <canvas id="MainCanvas1" width="1024" height="768" style="position: absolute; top: 0px; left: 0px">
+            It's time to update your browser if you see this...
+         </canvas>
+         <!--
+         <canvas id="MainCanvas2" style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px">
+            It's time to update your browser if you see this...
+         </canvas>
+         -->
+      </div>
+      <div style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid" id="Interface" ondragstart="return false" onmouseover="this.focus()" tabindex="1" onkeydown="KeyDown(event)" onkeyup="KeyUp(event)" onmousemove="UpdateMouseXY(event)"></div>
+      <div style="width: 400px; height: 150px; position: absolute; top: 0px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="TimingPanel">
+         Timing panel<br />
+      </div>
+      <div style="width: 400px; height: 268px; position: absolute; top: 350px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="MessagePanel">
+         Message panel<br />
+      </div>
+      <div style="width: 400px; height: 200px; position: absolute; top: 150px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="ParticlePanel">
+         Particle panel<br />
+      </div>
+      <div style="width: 400px; height: 150px; position: absolute; top: 618px; left: 1050px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="ExplanationPanel">
+         Displays a single PYTHIA&trade; event
+         <p>
+            Controls:<br />
+            &nbsp;&nbsp;&nbsp;Arrow keys to move around, page up/down to move foward/backward, home/end to rotate viewport, 'R' to reset to beginning<br />
+         </p>
+      </div>
+   </body>
+</html>
