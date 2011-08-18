@@ -1,4 +1,4 @@
-function InitializeParticles()
+function InitializeParticlesTTbar()
 {
    ParticleList.length = 0;
 
@@ -6,6 +6,7 @@ function InitializeParticles()
    NewParticle.P = new Array(4);
    NewParticle.V0 = new Array(4);
 
+   /*
    NewParticle.P[0] = 7000.0000000000
    NewParticle.P[1] = 0.0000000000
    NewParticle.P[2] = 0.0000000000
@@ -17,6 +18,7 @@ function InitializeParticles()
    NewParticle.PDGID = 90
    NewParticle.Time = 999999
    ParticleList[ParticleList.length] = NewParticle.clone()
+   */
 
    NewParticle.P[0] = 2.2955518976
    NewParticle.P[1] = 1.8867496739

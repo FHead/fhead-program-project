@@ -63,7 +63,8 @@ function Initialize()
    KeyboardStatus[35] = 0;
    KeyboardStatus[36] = 0;
  
-   InitializeParticles();
+   // InitializeParticlesTTbar();
+   InitializeParticlesZTauTau();
    CreateParticleNames();
 
    StartTimer();
@@ -160,7 +161,7 @@ function KeyUp(event)
 
 function CalculateLocation(ReferenceTime, CurrentMilliSecond)
 {
-   var Time = (CurrentMilliSecond - ReferenceTime) / 1000;   // real: seconds; imaginary: nanoseconds, or real / TimeSlowDown
+   var Time = (CurrentMilliSecond - ReferenceTime) / 1000;   // in units of seconds (real), in units of seconds/SlowDown (program); if SlowDown = 1e9, then this number is in ns
 
    var FrontDirection = Normalize(Negative(UserPosition));
    UserUp = Normalize(UserUp);   // update "up" direction so that it's perpendicular to front (TODO)
@@ -169,23 +170,24 @@ function CalculateLocation(ReferenceTime, CurrentMilliSecond)
 
    Balls.length = 0;
    
+   var PythiaUnitConversion = 0.01;   // pythia unit to unit of this program
    for(ParticleIndex in ParticleList)
    {
-      if(isNaN(ParticleIndex) == true)   // WHY???
+      if(isNaN(ParticleIndex) == true)
          continue;
    
       Particle = ParticleList[ParticleIndex];
 
-      if(Time > Particle.Time)   // died already
+      if(Time > Particle.Time * PythiaUnitConversion / SpeedOfLight * TimeSlowDown)   // died already
          continue;
-      if(Time < Particle.V0[0])   // not born yet
+      if(Time < Particle.V0[0] * PythiaUnitConversion / SpeedOfLight * TimeSlowDown)   // not born yet
          continue;
 
-      var ElapsedTime = Time / TimeSlowDown - Particle.V0[0];
+      var ElapsedTime = Time / TimeSlowDown - Particle.V0[0] * PythiaUnitConversion / SpeedOfLight;
       
-      var Beta = MultiplyConst(Particle.P, 1.0 / (Particle.P[0] + 0.01));
+      var Beta = MultiplyConst(Particle.P, 1.0 / (Particle.P[0] + 0.000001));
       
-      var CurrentLocation = Add(Particle.V0, MultiplyConst(Beta, SpeedOfLight * ElapsedTime));
+      var CurrentLocation = Add(MultiplyConst(Particle.V0, PythiaUnitConversion), MultiplyConst(Beta, SpeedOfLight * ElapsedTime));
       var RelativeDistance = Subtract(CurrentLocation, UserPosition);
       var DistanceToViewer = Math.sqrt(Dot(RelativeDistance, RelativeDistance));
       var SignedDirection = Dot(RelativeDistance, FrontDirection);
