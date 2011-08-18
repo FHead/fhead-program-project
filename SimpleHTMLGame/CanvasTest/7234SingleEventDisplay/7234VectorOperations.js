@@ -123,3 +123,11 @@ function GetPhi(X)
    return Angle;
 }
 
+function GetEta(X)
+{
+   var MomentumSize = GetSize(X);
+   var MomentumZ = X[3];
+   
+   return 0.5 * Math.log((MomentumSize - MomentumZ) / (MomentumSize + MomentumZ));
+}
+

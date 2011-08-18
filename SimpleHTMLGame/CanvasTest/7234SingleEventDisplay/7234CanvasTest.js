@@ -17,10 +17,11 @@ var MouseX = 0;
 var MouseY = 0;
 var FocusParticle = -1;
 var InitialCircleSize = 2;
+var SampleType = 'None';
 
 var UserPosition = new Array(4);
 var UserUp = new Array(4);
-var TimeSlowDown = 1000000000 / 2.5;   // real 1 ns is slowed down to O(1) second
+var TimeSlowDown = 1000000000;   // real 1 ns is slowed down to O(1) second
 var SpeedOfLight = 299792458;   // m/s
 var ViewDistance = 5;
 var MaximumDistance = 1000;
@@ -63,8 +64,16 @@ function Initialize()
    KeyboardStatus[35] = 0;
    KeyboardStatus[36] = 0;
  
-   // InitializeParticlesTTbar();
-   InitializeParticlesZTauTau();
+   if(Math.random() < 0.5)
+   {
+      SampleType = 'TTbar';
+      InitializeParticlesTTbar();
+   }
+   else
+   {
+      SampleType = 'ZTauTau';
+      InitializeParticlesZTauTau();
+   }
    CreateParticleNames();
 
    StartTimer();
@@ -124,7 +133,7 @@ function StartTimer()
 
 function UpdateKeyStatus()
 {
-   messagestring = 'Message panel<br /><br />';
+   messagestring = 'Message panel (Current sample: ' + SampleType + ')<br /><br />';
 
    messagestring = messagestring + 'Currently pressed key ---<br />';
    for(i in KeyboardStatus)
@@ -405,6 +414,7 @@ function UpdateFocusParticle()
       ParticlePanelMessage = ParticlePanelMessage + '<br />';
       ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;Energy = ' + ParticleList[Index].P[0].toFixed(2) + ' GeV<br />';
       ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;PT = ' + Math.sqrt(ParticleList[Index].P[1] * ParticleList[Index].P[1] + ParticleList[Index].P[2] * ParticleList[Index].P[2]).toFixed(2) + ' GeV/c<br />';
+      ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;Eta = ' + GetEta(ParticleList[Index].P).toFixed(3) + ', Phi = ' + GetPhi(ParticleList[Index].P).toFixed(3) + '<br />';
       ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;Momentum = (' + ParticleList[Index].P[1].toFixed(2) + ', ' +  + ParticleList[Index].P[2].toFixed(2) + ', ' + ParticleList[Index].P[3].toFixed(2) + ') (GeV/c)<br />';
       
       document.getElementById('ParticlePanel').innerHTML = ParticlePanelMessage;
