@@ -92,6 +92,7 @@ function InitializeParticles()
    NewParticle.Time = 999999
    ParticleList[ParticleList.length] = NewParticle.clone()
 
+   /*
    NewParticle.P[0] = 10.41
    NewParticle.P[1] = -1.26
    NewParticle.P[2] = 0.16
@@ -103,7 +104,9 @@ function InitializeParticles()
    NewParticle.PDGID = 111
    NewParticle.Time = 0.00
    ParticleList[ParticleList.length] = NewParticle.clone()
+   */
 
+   /*
    NewParticle.P[0] = 13.49
    NewParticle.P[1] = 0.91
    NewParticle.P[2] = -0.00
@@ -115,6 +118,7 @@ function InitializeParticles()
    NewParticle.PDGID = 111
    NewParticle.Time = 0.00
    ParticleList[ParticleList.length] = NewParticle.clone()
+   */
 
    NewParticle.P[0] = 6.49
    NewParticle.P[1] = -0.46
