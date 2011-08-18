@@ -20,7 +20,7 @@ var InitialCircleSize = 2;
 
 var UserPosition = new Array(4);
 var UserUp = new Array(4);
-var TimeSlowDown = 1000000000 / 5;   // real 1 ns is slowed down to O(1) second
+var TimeSlowDown = 1000000000 / 2.5;   // real 1 ns is slowed down to O(1) second
 var SpeedOfLight = 299792458;   // m/s
 var ViewDistance = 5;
 var MaximumDistance = 1000;
@@ -64,6 +64,7 @@ function Initialize()
    KeyboardStatus[36] = 0;
  
    InitializeParticles();
+   CreateParticleNames();
 
    StartTimer();
 }
@@ -128,9 +129,9 @@ function UpdateKeyStatus()
    for(i in KeyboardStatus)
    {
       if(KeyboardStatus[i] > 0)
-         messagestring = messagestring + '&nbsp;&nbsp;&nbsp;' + i.toString() + '<br />';
+         messagestring = messagestring + '&nbsp;&nbsp;' + i.toString() + '';
    }
-   messagestring = messagestring + '<br />';
+   messagestring = messagestring + '<br /><br />';
    
    messagestring = messagestring + RenderMessageString + '<br />';
 
@@ -182,7 +183,7 @@ function CalculateLocation(ReferenceTime, CurrentMilliSecond)
 
       var ElapsedTime = Time / TimeSlowDown - Particle.V0[0];
       
-      var Beta = MultiplyConst(Particle.P, 1.0 / Particle.P[0]);
+      var Beta = MultiplyConst(Particle.P, 1.0 / (Particle.P[0] + 0.01));
       
       var CurrentLocation = Add(Particle.V0, MultiplyConst(Beta, SpeedOfLight * ElapsedTime));
       var RelativeDistance = Subtract(CurrentLocation, UserPosition);
@@ -225,15 +226,30 @@ function Render(CanvasHandle)
          
       var CircleSize = InitialCircleSize * 100.0 / Balls[i].Distance;
 
-      CanvasHandle.fillStyle = '#C0C0FF';
+      if(Balls[i].Index == FocusParticle)
+         CanvasHandle.fillStyle = '#FFC0C0';
+      else
+         CanvasHandle.fillStyle = '#C0C0FF';
       CanvasHandle.beginPath();
-      CanvasHandle.arc(Balls[i].X, Balls[i].Y, CircleSize * 1.2, 0, Math.PI * 2, true);
+      CanvasHandle.arc(Balls[i].X, Balls[i].Y, CircleSize * 1.1, 0, Math.PI * 2, true);
       CanvasHandle.closePath();
       CanvasHandle.fill();
-      if(i == FocusParticle)
+      if(Balls[i].Index == FocusParticle)
          CanvasHandle.fillStyle = '#FF7070';
       else
-         CanvasHandle.fillStyle = '#7070FF';
+      {
+         var Energy2 = ParticleList[Balls[i].Index].P[1] * ParticleList[Balls[i].Index].P[1] + ParticleList[Balls[i].Index].P[2] * ParticleList[Balls[i].Index].P[2];
+         if(Energy2 < 0.01)
+            CanvasHandle.fillStyle = '#0000FF';
+         else if(Energy2 > 10000)
+            CanvasHandle.fillStyle = '#FFFFFF';
+         else
+         {
+            var LogEnergy = Math.log(Energy2) - Math.log(2);
+            var ColorValue = Math.floor(255 * (LogEnergy + Math.LN10) / (3 * Math.LN10));
+            CanvasHandle.fillStyle = 'rgb(' + ColorValue + ', ' + ColorValue + ', 255)';
+         }
+      }
       CanvasHandle.beginPath();
       CanvasHandle.arc(Balls[i].X, Balls[i].Y, CircleSize, 0, Math.PI * 2, true);
       CanvasHandle.closePath();
@@ -357,7 +373,7 @@ function UpdateMouseXY(event)
 
 function UpdateFocusParticle()
 {
-   FocusParticle = -1;
+   // FocusParticle = -1;
    
    for(var i = Balls.length - 1; i >= 0; i = i - 1)
    {
@@ -370,9 +386,26 @@ function UpdateFocusParticle()
    
       if(DeltaR2 < CircleSize * CircleSize)
       {
-         FocusParticle = i;
+         FocusParticle = Balls[i].Index;
          break;
       }
+   }
+   
+   if(FocusParticle >= 0)
+   {
+      var ParticlePanelMessage = '';
+      var Index = FocusParticle;
+
+      ParticlePanelMessage = ParticlePanelMessage + 'Selected particle (index = ' + Index + ')<br />';
+      ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;PDG ID = ' + ParticleList[Index].PDGID;
+      if(ParticleList[Index].PDGID.toString() in ParticleName)
+         ParticlePanelMessage = ParticlePanelMessage + ' (' + ParticleName[ParticleList[Index].PDGID.toString()] + ')';
+      ParticlePanelMessage = ParticlePanelMessage + '<br />';
+      ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;Energy = ' + ParticleList[Index].P[0].toFixed(2) + ' GeV<br />';
+      ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;PT = ' + Math.sqrt(ParticleList[Index].P[1] * ParticleList[Index].P[1] + ParticleList[Index].P[2] * ParticleList[Index].P[2]).toFixed(2) + ' GeV/c<br />';
+      ParticlePanelMessage = ParticlePanelMessage + '&nbsp;&nbsp;&nbsp;Momentum = (' + ParticleList[Index].P[1].toFixed(2) + ', ' +  + ParticleList[Index].P[2].toFixed(2) + ', ' + ParticleList[Index].P[3].toFixed(2) + ') (GeV/c)<br />';
+      
+      document.getElementById('ParticlePanel').innerHTML = ParticlePanelMessage;
    }
 }
 
