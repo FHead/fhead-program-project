@@ -20,7 +20,7 @@ var InitialCircleSize = 2;
 
 var UserPosition = new Array(4);
 var UserUp = new Array(4);
-var TimeSlowDown = 1000000000;   // real 1 ns is slowed down to O(1) second
+var TimeSlowDown = 1000000000 / 5;   // real 1 ns is slowed down to O(1) second
 var SpeedOfLight = 299792458;   // m/s
 var ViewDistance = 5;
 var MaximumDistance = 1000;
@@ -50,7 +50,7 @@ function Initialize()
 
    UserPosition[0] = 0;
    UserPosition[1] = 0;
-   UserPosition[2] = -100;
+   UserPosition[2] = -150;
    UserPosition[3] = 0;
    
    UserUp[0] = 0;
@@ -365,6 +365,8 @@ function UpdateFocusParticle()
       var DeltaY = MouseY - Balls[i].Y;
       var DeltaR2 = DeltaX * DeltaX + DeltaY * DeltaY;
       var CircleSize = InitialCircleSize * 100.0 / Balls[i].Distance * 1.25;
+      if(CircleSize < 5)
+         CircleSize = 5;
    
       if(DeltaR2 < CircleSize * CircleSize)
       {
