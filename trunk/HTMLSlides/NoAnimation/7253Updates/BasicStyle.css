@@ -1,0 +1,69 @@
+body
+{
+   font-family: sans-serif;
+}
+
+div.slide
+{
+   border: 3px solid #A0A0A0;
+   width: 800px;
+   height: 600px;
+   background-color: #F0FFFF;
+   position: relative;
+}
+
+div h1
+{
+   text-align: center;
+   margin: 45px;
+   font-size: 30pt;
+}
+
+div.slide ul li
+{
+   margin: 15px;
+   font-size: 22pt;
+}
+
+div.slide ul ul li
+{
+   margin: 15px;
+   font-size: 20pt;
+}
+
+div.slide ul ul ul li
+{
+   margin: 15px;
+   font-size: 18pt;
+}
+
+div p.page-number
+{
+   position: absolute;
+   left: 760px;
+   top: 550px;
+   font-size: 12pt;
+}
+
+div.slide div.imageblock
+{
+   text-align: center;
+}
+
+div.slide div.imageblock img
+{
+   max-height: 400px;
+}
+
+div.slide div.floating-text
+{
+   position: absolute;
+   font-size: 16pt;
+   background-color: #FFFFFF;
+   border: 1px solid #000000;
+   padding: 5px;
+}
+
+
+
+
