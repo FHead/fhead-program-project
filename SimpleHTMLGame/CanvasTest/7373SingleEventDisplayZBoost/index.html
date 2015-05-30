@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <title>Single-event display</title>
+      <script type="text/javascript" src="7234TTbarExample.js"></script>
+      <script type="text/javascript" src="7365LQExample.js"></script>
+      <script type="text/javascript" src="7234ZTauTauExample.js"></script>
+      <script type="text/javascript" src="7234ParticleNames.js"></script>
+      <script type="text/javascript" src="7234VectorOperations.js"></script>
+      <script type="text/javascript" src="7365CanvasTest.js"></script>
+   </head>
+   <body onload='Initialize();'>
+      <div style="width: 800px; height: 600px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid">
+         <canvas id="MainCanvas1" width="800px" height="600px" style="position: absolute; top: 0px; left: 0px">
+            It's time to update your browser if you see this...
+         </canvas>
+         <!--
+         <canvas id="MainCanvas2" style="width: 1024px; height: 768px; position: absolute; top: 0px; left: 0px">
+            It's time to update your browser if you see this...
+         </canvas>
+         -->
+      </div>
+      <div style="width: 800px; height:600px; position: absolute; top: 0px; left: 0px; border-color:#000000; border-style:solid" id="Interface" ondragstart="return false" onmouseover="this.focus()" tabindex="1" onkeydown="KeyDown(event)" onkeyup="KeyUp(event)" onmousemove="UpdateMouseXY(event)"></div>
+      <img src="Palette.png" style="height: 600px; position: absolute; top: 0px; left: 825px;" />
+      <div style="width: 300px; height: 150px; position: absolute; top: 0px; left: 950px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="TimingPanel">
+         Timing panel<br />
+      </div>
+      <div style="width: 300px; height: 200px; position: absolute; top: 150px; left: 950px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="ParticlePanel">
+         Particle panel<br />
+      </div>
+      <div style="width: 300px; height: 218px; position: absolute; top: 350px; left: 950px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0; visibility: hidden;" id="MessagePanel">
+         Message panel<br />
+      </div>
+      <div style="width: 300px; height: 200px; position: absolute; top: 350px; left: 950px; border-color:#FF0000; border-style:dashed; background-color:#A0FFA0;" id="ExplanationPanel">
+         Displays a single PYTHIA&trade; event<br />
+         Controls:<br />
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrow keys to move around, page up/down to move foward/backward, home/end to rotate viewport, 'R' to reset to beginning, mouse-over a particle to see its properties<br />
+         Colors:<br />
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pink is selected; and for others, color represents transverse momentum (white = 100+ GeV/c, blue = 0.1- GeV/c)<br />
+      </div>
+      <div style="width: 300px; height: 50px; position: absolute; top: 550px; left: 950px; border-color: #FF0000; border-style: dashed; background-color:#A0FFA0;" id="SamplePanel">
+      </div>
+   </body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+   <head>
+      <title>HTML5 Slides</title>
+      <link rel="stylesheet" type="text/css" href="BasicStyle.css" />
+      <script type="text/javascript" src="7253PageConnection.js"></script>
+      <script type="text/javascript" src="7253MainControl.js"></script>
+   </head>
+   <body onload="Initialize()" onkeydown="KeyDown(event)">
+      <!--
+      <div style="position: absolute; top: 15px; left: 15px">
+         <img src="CaltechLogo.gif" alt="Caltech logo"/>
+      </div>
+      -->
+      <div class="slide" id="title-slide">
+         <h1>Outline</h1>
+         <ul>
+            <li>Setting up basic styles</li>
+            <ul>
+               <li>Including sub-bullet-points....</li>
+               <ul>
+                  <li>And sub-sub-bullet-points of course</li>
+                  <ul>
+                     <li>How about sub-sub-sub if I don't define it in css?</li>
+                     <li>Cool.  It inherited correctly.</li>
+                  </ul>
+               </ul>
+               <li>How does the Caltech logo fit in?</li>
+            </ul>
+            <li>What if the line is really long?  Does it wrap correctly?  I hope so.... let's see.</li>
+            <li>Use javascript to decide which one to show</li>
+            <li>Somehow link the pages with keyboard action</li>
+         </ul>
+         <!-- <p class="page-number">1</p> -->
+      </div>
+      <div class="slide" id="murmur1">
+         <h1>Another slide with bullet points</h1>
+         <ul>
+            <li>Slide number 2!</li>
+            <li>Let's type some random word and make some random slides to get started</li>
+            <li>We need page number...</li>
+            <li>Is there a way to automate this page numbering?</li>
+            <li>Maybe with javascript</li>
+         </ul>
+      </div>
+      <div class="slide" id="murmur2">
+         <h1>Yet another slide with bullet points</h1>
+         <ul>
+            <li>OK, let's use javascript to inject page number in the end</li>
+            <li>Make a css class in any case...</li>
+            <li>How do you link pages?</li>
+         </ul>
+      </div>
+      <div class="slide" id="picture-slide">
+         <h1>Pictures!</h1>
+         <div class="imageblock"><img src="picture.png" /></div>
+      </div>
+      <div class="slide" id="picture-slide2">
+         <h1>Moar pictures!</h1>
+         <div class="imageblock"><img src="picture2.png" /></div>
+         <div class="floating-text" style="left: 50px; top: 400px;">Straight to red demon!</div>
+      </div>
+      <div class="slide" id="murmur3">
+         <h1>Some other stuff</h1>
+         <ul>
+            <li>Actually you'll need some button to click to go up/down/left/right, otherwise there is
+            no way to look at slides with iPad/iPod etc.</li>
+            <li>Let's also make "floating-text-box" css class.</li>
+            <li>We should also capture space, enter and mouse scrolls</li>
+            <li>Maybe, next time, it would be a good idea to use hash marks in the address so that we know
+            which slides we're on, and it's easier to send link to people too</li>
+            <li>Animation? :p</li>
+         </ul>
+      </div>
+   </body>
+</html>
+
+
